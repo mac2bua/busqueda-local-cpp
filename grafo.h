@@ -1,5 +1,7 @@
-#include <vector>
+#ifndef GRAFO_H
+#define GRAFO_H
 
+#include <vector>
 
 class Grafo {
 
@@ -67,3 +69,4 @@ private:
 	int _n_aristas;
 };
 
+#endif

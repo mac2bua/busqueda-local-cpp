@@ -4,7 +4,11 @@ EstrategiaDeBusqueda::EstrategiaDeBusqueda(Grafo& g) {
 	calcularSolucionInicial(g);
 }
 
-Camino EstrategiaDeBusqueda::solucionInicial(Grafo& g) {
+const CaminoSimple& solucionActual() const {
+	return *_solucion_actual;
+}
+
+const CaminoSimple& EstrategiaDeBusqueda::solucionInicial(Grafo& g) {
 	Grafo::IteradorVecino iter = g.vecinos(0);
 	CaminoSimple c = new CaminoSimple(0);
 	while(iter.tieneProximo()) {
@@ -13,12 +17,38 @@ Camino EstrategiaDeBusqueda::solucionInicial(Grafo& g) {
 		}
 	}
 	_solucion_actual = c;
+	_grafo = g;
 }
 
-const IteradorVecindad EstrategiaDeBusqueda::vecindadSolucionActual() const {
+const Grafo& grafo() const {
+	return *_grafo;
+}
+
+EstrategiaDeBusqueda::IteradorVecindad EstrategiaDeBusqueda::vecindadSolucionActual() const {
 	return IteradorVecindad(*_solucion_actual);
 }
 
-void cambiarSolucionActual(CaminoSimple& c) {	
-	_solucion_actual = c;
+bool EstrategiaDeBusqueda::IteradorVecindad::haySiguiente() const {
+	return _indice < _solucion_actual.tamanio();
+}
+
+CaminoSimple& EstrategiaDeBusqueda::IteradorVecindad::siguiente() {
+	return _vecino_actual;
+}
+
+void EstrategiaDeBusqueda::IteradorVecindad::avanzar() {
+	_indice++;
+	CaminoSimple* vecino = new CaminoSimple(_solucion_actual);
+	while (vecino->nodos() > _indice+1) {
+		vecino->borrarUltimo();
+	}
+	const Grafo& g = estrategia.grafo();
+	Grafo::IteradorVecino iter = g.vecinos(_solucion_actual.iesimo(_indice));
+	while(iter.tieneProximo()) {
+		if(vecino->agregarNodo(iter.proximo())){ 
+			iter = g.vecinos(iter.proximo());
+		}
+	}
+
+	_vecino_actual = vecino;
 }

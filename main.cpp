@@ -1,5 +1,7 @@
 #include <iostream>
 #include "grafo.h"
+#include "caminosimple.h"
+#include "estrategia.h"
 
 using namespace std;
 
@@ -23,25 +25,29 @@ int main() {
 			g.agregarArista(n1, n2);
 		}
 
-		Camino mejorActual = caminoInicial(g);
-		Camino mejorAnterior = mejorActual;
+		EstrategiaDeBusqueda estrategia(g);
+		const CaminoSimple* mejorAnterior = &(estrategia.solucionActual());
 
 		do {
 			
-			IteradorVecindad iterador = vecindad(mejorActual);
-			while(iterador.hayProximo()) {
-				if(iterador.proximo().tamanio() > mejorActual.tamanio()) {
-					mejorActual = iterador.proximo();
+			EstrategiaDeBusqueda::IteradorVecindad iterador = estrategia.vecindadSolucionActual();
+			while(iterador.haySiguiente()) {
+				if(iterador.siguiente().cantNodos() > estrategia.solucionActual().cantNodos()) {
+					mejorAnterior = &(estrategia.solucionActual());
+					estrategia.cambiarSolucionActual(iterador.siguiente());
 				}
 				iterador.avanzar();
 			}
 
 
-		} while (mejorActual != mejorAnterior);
+		} while (estrategia.solucionActual() != *mejorAnterior);
 
-		cout << mejorActual << endl;
+		cout << estrategia.solucionActual() << endl;
 
 	}
+
+
+	
 
 	return 0;
 
