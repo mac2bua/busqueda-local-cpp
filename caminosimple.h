@@ -17,30 +17,18 @@ public:
 	void borrarNodo(int id);
 	void borrarUltimo();
 	int cantNodos() const;
-	// IteradorNodos nodos() const;
 	std::ostream& mostrarCamino(std::ostream& os) const;
 
-	// class IteradorNodos {
-
-	// public:
-
-	// 	bool haySiguiente() const;
-	// 	int siguiente();
-	// 	void avanzar();
-
-	// private:
-
-	// 	std::vector<int>& _nodos;
-	// 	int indice;
-	// 	IteradorNodos(std::vector<int>& ns, int i = 0) : _nodos(ns), indice(i) {}
-	// 	friend typename CaminoSimple::nodos() const;
-
-	// };
 
 private:
-	std::set<int>* _nodos;
-	std::vector<int>* _camino;
+	std::set<int> _nodos;
+	std::vector<int> _camino;
    	int _tam;
 };
+
+std::ostream& operator<<(std::ostream& os, const CaminoSimple& cs);
+bool operator==(const CaminoSimple& cs1, const CaminoSimple& cs2);
+bool operator!=(const CaminoSimple& cs1, const CaminoSimple& cs2);
+
 
 #endif
