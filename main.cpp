@@ -2,7 +2,7 @@
 #include "grafo.h"
 #include "caminosimple.h"
 
-using namespace std;
+
 
 
 int main() {
@@ -12,31 +12,34 @@ int main() {
 
 
 	// Leo el grafo desde stdin
-	cin >> n;
+	std::cin >> n;
 	Grafo g(n);
+	std::cin >> m;
+	
 
-	std::cout << "grafo -> #N: " << g.cantNodos() << " #E: " << g.cantAristas() << std::endl; 
-
-	cin >> m;
 	while (m--) {
-		cin >> n1 >> n2;
+		std::cin >> n1 >> n2;
 		g.agregarArista(n1, n2);
 	}
 
 
+	std::cout << "grafo -> #N: " << g.cantNodos() << " #E: " << g.cantAristas() << std::endl; 
+	
 	// Genero solucion inicial
 	Grafo::IteradorVecinos iter = g.vecinos(0);
 	CaminoSimple c;
 	while(iter.haySiguiente()) {
-		std::cout << "iter" << std::endl;
+	//	std::cout << "iter" << std::endl;
 		if(c.agregarNodo(iter.siguiente())){ 
 			iter = g.vecinos(iter.siguiente());
 		}
 		iter.avanzar();
 	}
 
-	std::cout << "camino inicial: ";
-	c.mostrarCamino(cout);
+	std::cout << "Tamaño de camino inicial: ";
+	std::cout << c.cantNodos() << std::endl;
+	std::cout << "Camino inicial: ";
+	c.mostrarCamino(std::cout);
 
 
 	
@@ -67,16 +70,22 @@ int main() {
 			if (vecino.cantNodos() > c.cantNodos()) {
 				c = vecino;
 				hayMejora = true;
-				cout << "\tmejor vecino encontrado:";
-				c.mostrarCamino(cout);
+				std::cout << "\tTamaño de mejor vecino: ";
+				std::cout << c.cantNodos()<< std::endl;
+				std::cout << "\tMejor vecino encontrado:";
+				c.mostrarCamino(std::cout);
 			}
 			_indice++;
 		}
 	}
 
 	// por ultimo muestro la solucion encontrada
-	cout << "camino encontrado: ";
-	c.mostrarCamino(cout);
+	
+	
+	std::cout << "Tamaño de camino final: ";
+	std::cout << c.cantNodos() << std::endl;
+	std::cout << "Camino encontrado: ";
+	c.mostrarCamino(std::cout);
 
 	return 0;
 }
