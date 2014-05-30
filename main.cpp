@@ -3,8 +3,6 @@
 #include "caminosimple.h"
 
 
-
-
 int main() {
 
 
@@ -22,7 +20,7 @@ int main() {
   }
 
 
-  std::cout << "grafo -> #N: " << g.cantNodos() << " #E: " << g.cantAristas() << std::endl;
+  std::cout << g;
 
   // Genero solucion inicial
   CaminoSimple c;

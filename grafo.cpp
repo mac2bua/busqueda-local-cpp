@@ -2,7 +2,13 @@
 #include <algorithm>
 #include "grafo.h"
 
-Grafo::Grafo(int cantNodos) : Grafo() {
+Grafo::Grafo() {
+  _adyacencias = vector<Vecinos>();
+  _n_aristas = 0;
+}
+
+Grafo::Grafo(int cantNodos) {
+  _n_aristas = 0;
   for (int i = 0; i < cantNodos; i++) {
     this->agregarNodo();
   }
@@ -36,4 +42,21 @@ Grafo::Nodos Grafo::nodos() const {
   vector<Nodo> v(cantNodos());
   iota(v.begin(), v.end(), 0);
   return v;
+}
+
+ostream& operator<<(ostream& os, const Grafo& g) {
+  if ( std::max(g.cantNodos(), g.cantAristas()) < 20) {
+    os << "G: {" << std::endl;
+    for (int i = 0; i < g.cantNodos(); i++) {
+      os << "nodo: " << i << " => vecinos: ["; 
+      const Grafo::Vecinos vs = g.vecinos(i);
+      for (Grafo::IteradorVecinos it = vs.begin(); it != vs.end(); ++it) {
+        os << " " << *it;
+      }
+      os << " ]" << std::endl;
+    }
+    os << "}" << std::endl;
+  } else {
+    os << "G: <#V(G): " << g.cantNodos() << ", #E(G): " << g.cantAristas() << ">" << std::endl;
+  }
 }

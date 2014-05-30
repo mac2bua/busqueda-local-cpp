@@ -2,7 +2,10 @@
 #define GRAFO_H
 
 #include <vector>
+#include <iostream>
+
 using std::vector;
+using std::ostream;
 
 class Grafo {
 public:
@@ -13,7 +16,7 @@ public:
   typedef Nodos::const_iterator IteradorNodos;
   typedef Vecinos::const_iterator IteradorVecinos;
 
-  Grafo() = default;
+  Grafo();
   Grafo(const Grafo& g) = default;
   Grafo(int cantNodos);
   int cantNodos() const;
@@ -24,8 +27,10 @@ public:
   Nodos nodos() const;
 
 private:
-  std::vector<Vecinos> _adyacencias;
-  int _n_aristas = 0;
+  vector<Vecinos> _adyacencias;
+  int _n_aristas;
 };
+
+ostream& operator<<(ostream& os, const Grafo& g);
 
 #endif
