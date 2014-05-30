@@ -26,14 +26,15 @@ int main() {
 	std::cout << "grafo -> #N: " << g.cantNodos() << " #E: " << g.cantAristas() << std::endl; 
 	
 	// Genero solucion inicial
-	Grafo::IteradorVecinos iter = g.vecinos(0);
 	CaminoSimple c;
-	while(iter.haySiguiente()) {
-	//	std::cout << "iter" << std::endl;
-		if(c.agregarNodo(iter.siguiente())){ 
-			iter = g.vecinos(iter.siguiente());
-		}
-		iter.avanzar();
+  Grafo::Nodo v = 0;
+  Grafo::Vecinos ws = g.vecinos(v);
+	Grafo::IteradorVecinos iter = ws.begin();
+	while (iter != ws.end()) {
+		if(c.agregarNodo(*iter)) { 
+			ws = g.vecinos(*iter);
+      iter = ws.begin();
+		} else ++iter;
 	}
 
 	std::cout << "Tamaño de camino inicial: ";
@@ -58,12 +59,13 @@ int main() {
 			}
 
 			int x = c.iesimo(_indice);
-			Grafo::IteradorVecinos iter = g.vecinos(x);
-			while(iter.haySiguiente()) {
-				if(vecino.agregarNodo(iter.siguiente())){ 
-					iter = g.vecinos(iter.siguiente());
-				}
-				iter.avanzar();
+      Grafo::Vecinos ws = g.vecinos(x);
+      Grafo::IteradorVecinos iter = ws.begin();
+      while (iter != ws.end()) {
+				if (vecino.agregarNodo(*iter)) { 
+				  ws = g.vecinos(*iter);
+          iter = ws.begin();
+				} else ++iter;
 			}
 
 			// actualizo la mejor solucion

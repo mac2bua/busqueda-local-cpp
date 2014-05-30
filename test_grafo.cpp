@@ -87,10 +87,11 @@ void testIterarNodos() {
 	g.agregarNodo();
 	g.agregarArista(4, 3);
 
-	Grafo::IteradorNodos it = g.nodos();
+  Grafo::Nodos ns = g.nodos();
+	Grafo::IteradorNodos it = ns.begin();
 	int cantNodos = 0;
-	while(it.haySiguiente()) {
-		it.avanzar();
+	while(it != ns.end()) {
+		++it;
 		cantNodos++;
 	}
 	assert(cantNodos == 5);
@@ -101,27 +102,29 @@ void testIterarNodos() {
 void testIterarVecinos() {
 
 	Grafo g2(10);
-	
-	Grafo::IteradorNodos it2 = g2.nodos();
-	while(it2.haySiguiente()) {
-		Grafo::IteradorVecinos itVecinos = g2.vecinos(it2.siguiente());
-		assert(!itVecinos.haySiguiente());
-		it2.avanzar();
+  Grafo::Nodos nodos = g2.nodos();
+	Grafo::IteradorNodos it2 = nodos.begin();
+	while(it2 != nodos.end()) {
+    Grafo::Vecinos ws = g2.vecinos(*it2);
+		Grafo::IteradorVecinos itVecinos = ws.begin();;
+		assert(itVecinos == ws.end());
+		++it2;
 	}
 
 	g2.agregarArista(1,2);
 	g2.agregarArista(2,3);
 	
-	Grafo::IteradorNodos it3 = g2.nodos();
-	int cantAdyacencias = 0; 
-	while(it3.haySiguiente()) {
-
-		Grafo::IteradorVecinos itVecinos2 = g2.vecinos(it3.siguiente());
-		while(itVecinos2.haySiguiente()) {
-			itVecinos2.avanzar();
+  Grafo::Nodos nodos2 = g2.nodos();
+	Grafo::IteradorNodos it3 = nodos2.begin();
+	int cantAdyacencias = 0;
+	while(it3 != nodos2.end()) {
+    Grafo::Vecinos ws = g2.vecinos(*it3);
+		Grafo::IteradorVecinos itVecinos2 = ws.begin();
+		while(itVecinos2 != ws.end()) {
+			++itVecinos2;
 			cantAdyacencias++;
 		}
-		it3.avanzar();
+		++it3;
 	}
 
 	assert((cantAdyacencias/2) == g2.cantAristas());
