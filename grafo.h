@@ -56,10 +56,10 @@ private:
 
 	struct Nodo {
 		int _id;
-		std::vector<Nodo> _vecinos;
+		std::vector<int> _vecinos;
 		Nodo(int i) {
 			_id = i;
-			_vecinos = std::vector<Nodo>();
+			_vecinos = std::vector<int>();
 		} 
 	};
 

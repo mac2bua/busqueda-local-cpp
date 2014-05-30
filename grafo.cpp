@@ -49,8 +49,8 @@ int Grafo::agregarNodo() {
 
 void Grafo::agregarArista(int id1, int id2) {
 	assert(_nodos.size() > id1 && _nodos.size() > id2);
-	_nodos[id1]._vecinos.push_back(_nodos[id2]);
-	_nodos[id2]._vecinos.push_back(_nodos[id1]);
+	_nodos[id1]._vecinos.push_back(id2);
+	_nodos[id2]._vecinos.push_back(id1);
 	_n_aristas++;
 }
 
@@ -79,7 +79,7 @@ bool Grafo::IteradorVecinos::haySiguiente() {
 }
 
 int Grafo::IteradorVecinos::siguiente() {
-	return ((((_grafo->_nodos)[_nodo])._vecinos)[_indice_actual])._id;
+	return (((_grafo->_nodos)[_nodo])._vecinos)[_indice_actual];
 }
 
 void Grafo::IteradorVecinos::avanzar() {
