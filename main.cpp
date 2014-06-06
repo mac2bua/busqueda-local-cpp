@@ -9,7 +9,7 @@ int main() {
   int n, m, n1, n2;
 
 
-  // Leo el grafo desde stdin
+  // leo el grafo desde stdin
   std::cin >> n;
   Grafo g(n);
   std::cin >> m;
@@ -19,10 +19,9 @@ int main() {
     g.agregarArista(n1, n2);
   }
 
-
   std::cout << g;
 
-  // Genero solucion inicial
+  // genero solucion inicial
   CaminoSimple c;
   Grafo::Nodo v = 0;
   Grafo::Vecinos ws = g.vecinos(v);
@@ -79,8 +78,6 @@ int main() {
   }
 
   // por ultimo muestro la solucion encontrada
-
-
   std::cout << "Tamaño de camino final: ";
   std::cout << c.cantNodos() << std::endl;
   std::cout << "Camino encontrado: ";
