@@ -126,24 +126,24 @@ def max_path_size(gname, teams):
 	return max
 
 
-def teams_ranking(graph_set, teams):
+def ranking(graph_set, teams):
 	# mejores soluciones hasta el momento
 	max_paths = {}
 	for gname in graph_set.keys():
 		max_paths[gname] = max_path_size(gname, teams)
 
-	scores = {}
+	solutions = {}
 	for tname in teams.keys():
 		team = teams[tname]
-		score = 0
+		solutions_ok = []
 		for gname in graph_set.keys():
 			if (max_paths[gname] == len(team.path_for_graph(gname))):
-				score += 1
-		scores[tname] = score
+				solutions_ok.append(gname)
+		solutions[tname] = solutions_ok
 
-	ranking = sorted(teams.keys(), key = lambda team_name: scores[team_name])
+	ranking = sorted(teams.keys(), key = lambda team_name: len(solutions[team_name]))
 
-	return ranking, scores
+	return ranking, solutions
 
 
 def load_teams(graph_set):
@@ -156,9 +156,9 @@ if __name__ == '__main__':
 	graph_set = load_graph_set()
 	teams = load_teams(graph_set)
 
-	ranking, scores =	teams_ranking(graph_set, teams)
+	ranking, scores =	ranking(graph_set, teams)
 
 	ranking.reverse()
 
 	for team in ranking:
-		print 'Team:', team.name(), '- Score:', scores[team]
+		print 'Team:', team.name(), '- Score:', len(scores[team]), '- Graphs:', scores[team]
