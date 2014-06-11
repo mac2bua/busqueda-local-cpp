@@ -24,6 +24,7 @@ int main() {
   // genero solucion inicial
   CaminoSimple c;
   Grafo::Nodo v = 0;
+  c.agregarNodo(v);
   Grafo::Vecinos ws = g.vecinos(v);
   Grafo::IteradorVecinos iter = ws.begin();
   while (iter != ws.end()) {

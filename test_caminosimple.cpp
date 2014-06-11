@@ -11,6 +11,28 @@ void testCrearCamino() {
  std::cout << "test crear camino simple ok" << std::endl;
 }
 
+void testCopiarCamino() {
+	CaminoSimple cs;
+	CaminoSimple copia1(cs);
+	assert(cs.cantNodos() == copia1.cantNodos());
+ 	assert(cs.agregarNodo(1) == copia1.agregarNodo(1));
+ 	assert(cs.cantNodos() == copia1.cantNodos());
+
+ 	assert(copia1.agregarNodo(2));
+ 	assert(copia1.agregarNodo(4));
+ 	assert(copia1.agregarNodo(2) == false);
+
+ 	CaminoSimple copia2(copia1);
+ 	assert(copia2.cantNodos() == copia1.cantNodos());
+
+ 	for (int i = 0; i < copia1.cantNodos(); i++) {
+ 		assert(copia1.iesimo(i) == copia2.iesimo(i));
+ 	}
+
+
+ 	std::cout << "test copiar camino simple ok" << std::endl;
+}
+
 void testTodosDistintos() {
  CaminoSimple cs;
  for (int i = 0; i < 10; i++) {
@@ -38,6 +60,7 @@ void testAgregarElementosRepetidos() {
 int main() {
  
  testCrearCamino();
+ testCopiarCamino();
  testTodosDistintos();
  testAgregarElementosRepetidos();
  

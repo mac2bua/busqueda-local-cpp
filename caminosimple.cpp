@@ -13,7 +13,7 @@ CaminoSimple::CaminoSimple(const CaminoSimple& cs) {
  _nodos = set<int>();
  _camino = vector<int>();
  _tam = 0;
- for (int i = cs.cantNodos()-1; i >= 0; i--) {
+ for (int i = 0; i < cs.cantNodos(); i++) {
  	this->agregarNodo(cs.iesimo(i));
  }
 }

@@ -80,15 +80,18 @@ def load_graph_set():
 def is_valid(path, graph):
 	# el camino es simple
 	if (len(set(path)) != len(path)):
+		# print "tiene repetidos!"
 		return False
 	# el camino posee al menos un nodo, el cual es un nodo valido
 	if (len(path) < 1 or graph.num_nodes() < path[0]):
+			# print 'es vacio o el primer elemento es invalido'
 			return False
 
 	# el camino es un camino valido
 	ns = graph.neighbours(path[0]) 
 	for n in path[1:]:
 		if n not in ns:
+			# print 'no es vecino'
 			return False
 		ns = graph.neighbours(n)
 
