@@ -98,6 +98,7 @@ def is_valid(path, graph):
 # 2
 # K_10 1 2 3 5 6 //separado por espacio
 # P_5 6 3 1 4 2 			
+# R(10, 0.2) 1 2 3 4 5
 
 def build_solutions(solution_files, graph_set):
 	teams = {}
@@ -108,10 +109,17 @@ def build_solutions(solution_files, graph_set):
 		n = int(sf.readline().replace('\n', ''))
 		for i in range(n):
 			l = sf.readline().replace('\n', '').split(' ')
-			graph_name = l[0].lower()
-			path = [int(x) for x in l[1:]]
+			if (l[0].startswith('R')):
+				idx_first_node = 2
+				graph_name = l[0].lower() + ' ' + l[1].lower()
+			else:
+				idx_first_node = 1
+				graph_name = l[0].lower()
+			path = [int(x) for x in l[idx_first_node:]]
 			if (is_valid(path, graph_set[graph_name])):
 				team.add_solution(graph_name, path)
+			else:
+				print 'path not valid:', path, 'for graph:', graph_name
 		teams[team] = team
 		sf.close()
 
@@ -154,6 +162,7 @@ def load_teams(graph_set):
 if __name__ == '__main__':
 
 	graph_set = load_graph_set()
+	
 	teams = load_teams(graph_set)
 
 	ranking, scores =	ranking(graph_set, teams)
