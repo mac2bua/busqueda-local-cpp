@@ -48,13 +48,15 @@ void CaminoSimple::borrarNodo(int id) {
  }
 }
 
-void CaminoSimple::borrarUltimo() {
+int CaminoSimple::borrarUltimo() {
+ int ult;
  if (_tam > 0) {
- 	int ult = _camino.back();
+ 	ult = _camino.back();
  	_camino.pop_back();
  	_nodos.erase(ult);
  	_tam--;
  }
+ return ult;
 }
 
 int CaminoSimple::cantNodos() const {
