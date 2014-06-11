@@ -15,6 +15,26 @@ def printEdgeList(G, name):
     out.close()
     os.remove("temp.edgelist")
 
+
+def discPaths(numberOfTwo, numberOfHundred, name):
+    out = open(name, "w+")
+    n = numberOfHundred * 100 + numberOfTwo * 2
+    out.write(str(n) + "\n")
+    m = numberOfTwo + numberOfHundred * 99
+    out.write(str(m) + "\n")
+    node = 0
+    for i in range(0,numberOfTwo):
+        out.write(str(node) + " " + str(node+1) + "\n")
+        node = node + 2
+
+    for j in range(0,numberOfHundred):
+        for x in xrange(1,100):
+            out.write(str(node) + " " + str(node+1) + "\n")
+            node = node + 1
+        node = node + 1
+
+
+'''
 #Paths from P10 to P100 
 for i in range(10,110,10):
     P = nx.path_graph(i)
@@ -48,5 +68,7 @@ for p in [x/10.0 for x in range(2, 9)]:
         R = nx.fast_gnp_random_graph(i,p)
         name = "R("+str(i)+", "+str(p)+")"
         printEdgeList(R,name)
+'''
 
-
+for x in xrange(1,15):
+    discPaths(50, x, "50P_2and"+str(x)+"P_100")

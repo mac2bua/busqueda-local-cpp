@@ -19,7 +19,7 @@ public:
  int iesimo(int i) const;
  bool incluido(int id) const;
  void borrarNodo(int id);
- void borrarUltimo();
+ int borrarUltimo();
  int cantNodos() const;
  ostream& mostrarCamino(ostream& os) const;
 
