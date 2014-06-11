@@ -66,7 +66,7 @@ int CaminoSimple::cantNodos() const {
 ostream& CaminoSimple::mostrarCamino(ostream& os) const {
  for (int i = 0; i < _tam; i++) {
  	os << _camino[i];
- 	if (i < _tam-1) {os << " -> ";}
+ 	if (i < _tam-1) {os << " ";}
  }
  return os << std::endl;
 }

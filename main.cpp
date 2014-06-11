@@ -19,7 +19,7 @@ int main() {
     g.agregarArista(n1, n2);
   }
 
-  std::cout << g;
+  // std::cout << g;
 
   // genero solucion inicial
   CaminoSimple c;
@@ -33,10 +33,10 @@ int main() {
     } else ++iter;
   }
 
-  std::cout << "Tamaño de camino inicial: ";
-  std::cout << c.cantNodos() << std::endl;
-  std::cout << "Camino inicial: ";
-  c.mostrarCamino(std::cout);
+  // std::cout << "Tamaño de camino inicial: ";
+  // std::cout << c.cantNodos() << std::endl;
+  // std::cout << "Camino inicial: ";
+  // c.mostrarCamino(std::cout);
 
 
 
@@ -74,19 +74,19 @@ int main() {
       if (solucionVecina.cantNodos() > c.cantNodos()) {
         c = solucionVecina;
         hayMejora = true;
-        std::cout << "\tTamaño de mejor vecino: ";
-        std::cout << c.cantNodos()<< std::endl;
-        std::cout << "\tMejor vecino encontrado:";
-        c.mostrarCamino(std::cout);
+        // std::cout << "\tTamaño de mejor vecino: ";
+        // std::cout << c.cantNodos()<< std::endl;
+        // std::cout << "\tMejor vecino encontrado:";
+        // c.mostrarCamino(std::cout);
       }
       indice++;
     }
   }
 
   // por ultimo muestro la solucion encontrada
-  std::cout << "Tamaño de camino final: ";
-  std::cout << c.cantNodos() << std::endl;
-  std::cout << "Camino encontrado: ";
+  // std::cout << "Tamaño de camino final: ";
+  // std::cout << c.cantNodos() << std::endl;
+  // std::cout << "Camino encontrado: ";
   c.mostrarCamino(std::cout);
 
   return 0;
